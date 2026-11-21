@@ -52,7 +52,7 @@ body::after {
 }
 
 @layer components {
-  /* Sunburst rays — the cassette poster */
+  /* Sunburst rays — vintage public-works poster */
   .sunburst {
     background: repeating-conic-gradient(
       from -3deg at 50% 78%,
@@ -94,6 +94,21 @@ body::after {
       rgba(42, 31, 23, 0.045) 0 2px,
       transparent 2px 14px
     );
+  }
+
+  /* Architect's blueprint: deep teal with a fine + bold grid */
+  .blueprint {
+    background-color: var(--teal-deep);
+    background-image:
+      linear-gradient(rgba(243, 230, 201, 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243, 230, 201, 0.16) 1px, transparent 1px),
+      linear-gradient(rgba(243, 230, 201, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(243, 230, 201, 0.07) 1px, transparent 1px);
+    background-size:
+      80px 80px,
+      80px 80px,
+      16px 16px,
+      16px 16px;
   }
 
   /* 3-D block lettering */
@@ -140,18 +155,6 @@ body::after {
   }
 }
 
-/* Cassette reels */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.reel {
-  animation: spin 4s linear infinite;
-  transform-origin: center;
-  transform-box: fill-box;
-}
-
 @keyframes sway {
   0%,
   100% {
@@ -169,7 +172,6 @@ body::after {
   html {
     scroll-behavior: auto;
   }
-  .reel,
   .price-tag:hover {
     animation: none;
   }

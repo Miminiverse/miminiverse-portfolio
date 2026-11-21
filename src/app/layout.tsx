@@ -26,9 +26,9 @@ const body = Roboto_Slab({
 });
 
 export const metadata: Metadata = {
-  title: "Minh Tam Pham — Miminiverse",
+  title: "Minh Tam Pham — Solutions Architect for Civic Tech",
   description:
-    "Software engineer & researcher building AI systems, real-time apps and open-source hardware.",
+    "Minh Tam Pham builds clean, resilient civic-tech systems that make public services accessible, break down communication barriers and help students learn by doing — AI platforms, data pipelines and open-source hardware.",
 };
 
 export default function RootLayout({
