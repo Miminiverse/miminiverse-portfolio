@@ -2,27 +2,175 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @font-face {
   font-family: "Only Chalk";
   src: url("/fonts/OnlyChalk.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+:root {
+  --cream: #f3e6c9;
+  --paper: #ead8b1;
+  --teal: #72a9b4;
+  --teal-deep: #2f6873;
+  --terra: #d2643e;
+  --terra-deep: #a8401c;
+  --mustard: #f2b53a;
+  --jade: #8fb394;
+  --jade-deep: #4e7a5a;
+  --slate: #4d6886;
+  --ink: #2a1f17;
+  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .16 0 0 0 0 .12 0 0 0 0 .09 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --blotch: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='b'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4' seed='7'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 .97 0 0 0 0 .9 0 0 0 -2.2 1.25'/></filter><rect width='100%' height='100%' filter='url(%23b)'/></svg>");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--ink);
+  background: var(--cream);
+}
+
+/* Film-grain over everything, like an old print */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background-image: var(--noise);
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+
+::selection {
+  background: var(--mustard);
+  color: var(--ink);
+}
+
+@layer components {
+  /* Sunburst rays — the cassette poster */
+  .sunburst {
+    background: repeating-conic-gradient(
+      from -3deg at 50% 78%,
+      var(--teal) 0deg 7deg,
+      var(--cream) 7deg 15deg
+    );
+  }
+
+  /* Worn ink patches on flat colour */
+  .weathered {
+    position: relative;
+    isolation: isolate;
+  }
+  .weathered::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--blotch);
+    background-size: 600px 600px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  /* Green striped paper — the flea market poster */
+  .stripes-green {
+    background-color: var(--jade);
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(42, 31, 23, 0.07) 0 3px,
+      transparent 3px 9px
+    );
+  }
+
+  .stripes-cream {
+    background-color: var(--paper);
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(42, 31, 23, 0.045) 0 2px,
+      transparent 2px 14px
+    );
+  }
+
+  /* 3-D block lettering */
+  .poster-shadow {
+    text-shadow:
+      2px 2px 0 var(--cream),
+      5px 5px 0 var(--slate);
+  }
+  .poster-shadow-ink {
+    text-shadow:
+      2px 2px 0 var(--ink),
+      4px 4px 0 var(--ink);
+  }
+
+  /* Ticket stub with punched notches */
+  .ticket {
+    --notch: 14px;
+    -webkit-mask:
+      radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+    mask:
+      radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat;
+  }
+
+  /* Postage stamp perforations */
+  .stamp {
+    --r: 6px;
+    -webkit-mask:
+      radial-gradient(var(--r) at var(--r) var(--r), #0000 97%, #000) calc(-1 * var(--r)) calc(-1 * var(--r)) / calc(2 * var(--r)) calc(2 * var(--r));
+    mask:
+      radial-gradient(var(--r) at var(--r) var(--r), #0000 97%, #000) calc(-1 * var(--r)) calc(-1 * var(--r)) / calc(2 * var(--r)) calc(2 * var(--r));
+  }
+
+  /* Airmail border for the postcard */
+  .airmail {
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--terra) 0 16px,
+      var(--cream) 16px 28px,
+      var(--slate) 28px 44px,
+      var(--cream) 44px 56px
+    );
+  }
+}
+
+/* Cassette reels */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.reel {
+  animation: spin 4s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(var(--tilt, -3deg));
+  }
+  50% {
+    transform: rotate(calc(var(--tilt, -3deg) * -1));
+  }
+}
+.price-tag:hover {
+  animation: sway 0.9s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reel,
+  .price-tag:hover {
+    animation: none;
+  }
 }
