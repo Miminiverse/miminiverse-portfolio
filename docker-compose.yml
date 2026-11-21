@@ -10,7 +10,7 @@ services:
       - "3000:3000"
     restart: always
     environment:
-      - BUILD_VERSION=1f660565943e5d60d52bd4ac15ea4d28476faf80
+      - BUILD_VERSION=2b8519bd588d209a9f09d8a169289f3cd3797c64
     deploy:
       labels:
         - "com.centurylinklabs.watchtower.enable=true"
