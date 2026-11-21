@@ -139,6 +139,17 @@ export default function About() {
                   Center. Teaching isn&apos;t separate from my own growth — it&apos;s part of it.
                 </p>
               </Track>
+
+              <Track n={6} title="Off the Clock">
+                <p>
+                  Home is run by <Num>4 lovely cats</Num> — <Num>2 kittens</Num> who are still
+                  testing the laws of physics on every shelf, and <Num>2 adults</Num> who supervise
+                  my code reviews from the keyboard. And the first time my partner and I met, it was
+                  their birthday — so I made them a <Num>3D car show video</Num> as a gift. It&apos;s
+                  still one of my favorite things I&apos;ve ever built: no users, no metrics, just
+                  one person smiling.
+                </p>
+              </Track>
             </div>
 
             <footer className="mt-12 border-t-2 border-dashed border-ink/30 pt-6">
